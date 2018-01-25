@@ -8,13 +8,14 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringRunner;
-import ru.dartIt.model.User;
+import ru.dartIt.model.Ingredient;
 import ru.dartIt.util.exception.NotFoundException;
 
-import java.util.Collections;
+
 import java.util.List;
 
-import static ru.dartIt.UserTestData.*;
+import static ru.dartIt.IngredientTestData.*;
+
 
 @ContextConfiguration({
         "classpath:spring/spring-app.xml",
@@ -22,8 +23,7 @@ import static ru.dartIt.UserTestData.*;
 })
 @RunWith(SpringRunner.class)
 @Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
-public class UserServiceTest {
-
+public class IngredientServiceTest {
     static {
         // Only for postgres driver logging
         // It uses java.util.logging and logged via jul-to-slf4j bridge
@@ -31,42 +31,44 @@ public class UserServiceTest {
     }
 
     @Autowired
-    private UserService service;
+    private IngredientService service;
 
     @Test
     public void get() throws Exception {
-        User user = service.get(USER_ID);
-        assertMatch(user, USER);
+        Ingredient ingredient = service.get(POTATOES_ID);
+        assertMatch(ingredient, POTATOES);
     }
+
     @Test
     public void getAll() throws Exception {
-        List<User> all = service.getAll();
-        assertMatch(all, ADMIN, USER);
+        List<Ingredient> all = service.getAll();
+        assertMatch(all, POTATOES, BEET, MUSHROOM, MEAT, PEASE, EGG, COFFEE);
     }
     @Test
     public void create() throws Exception {
-        User newUser = new User(null, "New", "new@gmail.com", "newPass",  false);
-        User created = service.create(newUser);
-        newUser.setId(created.getId());
-        assertMatch(service.getAll(), ADMIN, newUser, USER);
+        Ingredient newIngredient = new Ingredient(null, "New");
+        Ingredient created = service.create(newIngredient);
+        newIngredient.setId(created.getId());
+        assertMatch(service.getAll(),POTATOES, BEET, MUSHROOM, MEAT, PEASE, EGG, COFFEE, newIngredient);
     }
     @Test
     public void delete() throws Exception {
-        service.delete(USER_ID);
-        assertMatch(service.getAll(), ADMIN);
+        service.delete(POTATOES_ID);
+        assertMatch(service.getAll(), BEET, MUSHROOM, MEAT, PEASE, EGG, COFFEE);
     }
     @Test
-    public void getByEmail() throws Exception {
-        User user = service.getByEmail("user@yandex.ru");
-        assertMatch(user, USER);
+    public void getByName() throws Exception {
+        Ingredient ingredient = service.getByName("Potatoes");
+        assertMatch(ingredient, POTATOES);
     }
     @Test
     public void update() throws Exception {
-        User updated = new User(USER);
+        Ingredient updated = new Ingredient(POTATOES);
         updated.setName("UpdatedName");
         service.update(updated);
-        assertMatch(service.get(USER_ID), updated);
+        assertMatch(service.get(POTATOES_ID), updated);
     }
+
     @Test(expected = NotFoundException.class)
     public void getNotFound() throws Exception {
         service.get(1);

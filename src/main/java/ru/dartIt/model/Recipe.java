@@ -10,6 +10,7 @@ public class Recipe extends AbstractNamedEntity {
     User user;
     int rating;
     protected List<Catalog> catalogs;
+    protected List<Ingredient> ingredients;
 
     public Recipe() {
     }

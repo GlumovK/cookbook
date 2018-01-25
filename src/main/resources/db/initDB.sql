@@ -53,14 +53,14 @@ CREATE TABLE catalog_to_recipe (
   id         INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
   catalog_id INTEGER NOT NULL,
   recipe_id  INTEGER NOT NULL,
-  CONSTRAINT FK_catalog_id FOREIGN KEY (catalog_id) REFERENCES catalogs (id),
-  CONSTRAINT FK_recipe_id FOREIGN KEY (recipe_id) REFERENCES recipes (id)
+  CONSTRAINT FK_catalog_id FOREIGN KEY (catalog_id) REFERENCES catalogs (id) ON DELETE CASCADE,
+  CONSTRAINT FK_recipe_id FOREIGN KEY (recipe_id) REFERENCES recipes (id) ON DELETE CASCADE
 );
 
 CREATE TABLE ingredient_to_recipe (
   id         INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
   ingredient_id INTEGER NOT NULL,
   recipe_id  INTEGER NOT NULL,
-  CONSTRAINT FK_ingredients_id FOREIGN KEY (ingredient_id) REFERENCES ingredients (id),
-  CONSTRAINT FK_recipe_id FOREIGN KEY (recipe_id) REFERENCES recipes (id)
+  CONSTRAINT FK_ingredient_id FOREIGN KEY (ingredient_id) REFERENCES ingredients (id) ON DELETE CASCADE,
+  CONSTRAINT FK_recipe_id FOREIGN KEY (recipe_id) REFERENCES recipes (id) ON DELETE CASCADE
 );

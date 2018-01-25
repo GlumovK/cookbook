@@ -14,5 +14,9 @@ public interface RecipeRepository {
     // null if not found
     Recipe get(int id);
 
+    List<Recipe> getByIngredient(int ingredientId);
+
+    List<Recipe> getByCatalog(int catalogId);
+
     List<Recipe> getAll();
 }

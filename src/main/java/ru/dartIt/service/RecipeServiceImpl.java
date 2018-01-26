@@ -23,10 +23,15 @@ public class RecipeServiceImpl implements RecipeService{
         this.repository = repository;
     }
 
+//    @Override
+//    public Recipe create(Recipe recipe) {
+//        Assert.notNull(recipe, "recipe must not be null");
+//        return repository.save(recipe);
+//    }
     @Override
-    public Recipe create(Recipe recipe) {
+    public Recipe create(Recipe recipe, int userId) {
         Assert.notNull(recipe, "recipe must not be null");
-        return repository.save(recipe);
+        return repository.save(recipe, userId);
     }
 
     @Override
@@ -48,17 +53,31 @@ public class RecipeServiceImpl implements RecipeService{
         Assert.notNull(catalogId, "catalogId must not be null");
         return repository.getByCatalog(catalogId);
     }
+    @Override
+    public List<Recipe> getByName(String name){
+        Assert.notNull(name, "name must not be null");
+        return repository.getByName(name);
+    }
 
+    @Override
+    public List<Recipe> getByUser(int userId){
+        Assert.notNull(userId, "userId must not be null");
+        return repository.getByUser(userId);
+    }
 
     @Override
     public List<Recipe> getAll() {
         return repository.getAll();
     }
 
-    @Override
-    public void update(Recipe recipe) {
-        Assert.notNull(recipe, "recipe must not be null");
-        checkNotFoundWithId(repository.save(recipe), recipe.getId());
-    }
+//    @Override
+//    public void update(Recipe recipe) {
+//        Assert.notNull(recipe, "recipe must not be null");
+//        checkNotFoundWithId(repository.save(recipe), recipe.getId());
+//    }
+@Override
+public Recipe update(Recipe recipe, int userId) {
+    return checkNotFoundWithId(repository.save(recipe, userId), recipe.getId());
+}
 }
 

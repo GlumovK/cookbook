@@ -1,20 +1,18 @@
 package ru.dartIt;
 
+import ru.dartIt.model.Ingredient;
 import ru.dartIt.model.Recipe;
-import ru.dartIt.model.User;
+
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static ru.dartIt.model.AbstractBaseEntity.START_SEQ;
 
 public class RecipeTestData {
 
-//  ('Borsch', 'Суп со свеклой', 'алгоритм борща', 100000, 20),
-//          ('Mushroom soup', 'Суп с грибами', 'алгоритм грибовницы', 100000, 15),
-//          ('Olivie', 'Салат с мясом', 'алгоритм оливье', 100001, 26),
-//          ('Omelette', 'Жареные яйца', 'алгоритм яишницы', 100001, 11),
-//          ('Cappuccino', 'Кофе с молоком', 'алгоритм капучино', 100001, 42);
 
     public static final int BORSCH_ID = START_SEQ+2;
 
@@ -29,15 +27,17 @@ public class RecipeTestData {
 
 
     public static void assertMatch(Recipe actual, Recipe expected) {
-        assertThat(actual).isEqualToIgnoringGivenFields(expected, "user");
+        assertThat(actual).isEqualToIgnoringGivenFields(expected, "user", "ingredients", "catalogs");
     }
+
+
 
     public static void assertMatch(Iterable<Recipe> actual, Recipe... expected) {
         assertMatch(actual, Arrays.asList(expected));
     }
 
     public static void assertMatch(Iterable<Recipe> actual, Iterable<Recipe> expected) {
-        assertThat(actual).usingElementComparatorIgnoringFields("user").isEqualTo(expected);
+        assertThat(actual).usingElementComparatorIgnoringFields("user", "ingredients", "catalogs").isEqualTo(expected);
     }
 
 }

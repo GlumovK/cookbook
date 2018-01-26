@@ -31,7 +31,7 @@
 <body>
 <h1> Cookbook </h1>
 <ul>
-    <li><a href="catalogs">Catalog</a></li>
+    <li><a href="recipies">Recipies</a></li>
 </ul>
 </body>
 </html>

@@ -17,14 +17,15 @@
 <table border="1" cellpadding="8" cellspacing="0">
     <thead>
     <tr>
-        <th>Name</th>
+        <th>Catalog name</th>
 
     </tr>
     </thead>
     <c:forEach items="${catalogs}" var="catalog">
         <jsp:useBean id="catalog" scope="page" type="ru.dartIt.model.Catalog"/>
         <tr>
-            <td>${catalog.name}</td>
+            <td> <a href="recipies" >${catalog.name}</a></td>
+
         </tr>
     </c:forEach>
 </table>

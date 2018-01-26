@@ -8,6 +8,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -20,6 +21,9 @@ import java.util.Set;
         @NamedQuery(name = Recipe.DELETE, query = "DELETE FROM Recipe r WHERE r.id=:id"),
         @NamedQuery(name = Recipe.BY_INGREDIENT, query = "SELECT r FROM Recipe r join r.ingredients i WHERE i.id=?1"),
         @NamedQuery(name = Recipe.BY_CATALOG, query = "SELECT r FROM Recipe r join r.catalogs c WHERE c.id=?1"),
+        @NamedQuery(name = Recipe.BY_USER, query = "SELECT r FROM Recipe r WHERE r.user.id=?1"),
+        @NamedQuery(name = Recipe.BY_NAME, query = "SELECT r FROM Recipe r WHERE r.name=?1"),
+
         // "SELECT p FROM Provider p join p.categories c WHERE c.title=:title"
         //select b from Brand b inner join b.categoryCollection category  where category.id = :categoryId;
 })
@@ -32,6 +36,8 @@ public class Recipe extends AbstractNamedEntity {
     public static final String DELETE = "Recipe.delete";
     public static final String BY_INGREDIENT = "Recipe.byIngredient";
     public static final String BY_CATALOG = "Recipe.byCatalog";
+    public static final String BY_USER = "Recipe.byUser";
+    public static final String BY_NAME = "Recipe.byName";
 
     @Column(name = "description", nullable = false)
     @NotBlank
@@ -44,7 +50,7 @@ public class Recipe extends AbstractNamedEntity {
     @NotBlank
     private  String cookAlgorithm;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
@@ -60,7 +66,7 @@ public class Recipe extends AbstractNamedEntity {
 //            inverseJoinColumns = { @JoinColumn(name = "USER_PROFILE_ID") })
 //    private Set<UserProfile> userProfiles = new HashSet<UserProfile>();
 
-    @NotEmpty
+   // @NotEmpty
     @ManyToMany(fetch = FetchType.EAGER , cascade = CascadeType.ALL)
     @JoinTable(name = "ingredient_to_recipe",
             joinColumns = { @JoinColumn(name = "recipe_id") },
@@ -69,7 +75,7 @@ public class Recipe extends AbstractNamedEntity {
 
 
 
-    @NotEmpty
+  //  @NotEmpty
     @ManyToMany(fetch = FetchType.EAGER , cascade = CascadeType.ALL)
     @JoinTable(name = "catalog_to_recipe",
             joinColumns = { @JoinColumn(name = "recipe_id") },
@@ -77,6 +83,9 @@ public class Recipe extends AbstractNamedEntity {
     private Set<Catalog> catalogs = new HashSet<>();
 
     public Recipe() {
+    }
+    public Recipe( String name, String description, String cookAlgorithm) {
+        this(null, name, description, cookAlgorithm, 0);
     }
 
     public Recipe(Integer id, String name, String description, String cookAlgorithm, int rating) {

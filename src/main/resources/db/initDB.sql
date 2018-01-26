@@ -53,7 +53,7 @@ CREATE TABLE catalog_to_recipe (
   id         INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
   catalog_id INTEGER NOT NULL,
   recipe_id  INTEGER NOT NULL,
-  CONSTRAINT FK_catalog_id FOREIGN KEY (catalog_id) REFERENCES catalogs (id) ON DELETE CASCADE,
+    CONSTRAINT FK_catalog_id FOREIGN KEY (catalog_id) REFERENCES catalogs (id) ON DELETE CASCADE,
   CONSTRAINT FK_recipe_id FOREIGN KEY (recipe_id) REFERENCES recipes (id) ON DELETE CASCADE
 );
 

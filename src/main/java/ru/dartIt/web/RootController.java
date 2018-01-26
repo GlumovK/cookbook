@@ -6,10 +6,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.dartIt.service.CatalogService;
+import ru.dartIt.service.RecipeService;
 import ru.dartIt.service.UserService;
 
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Objects;
 
 @Controller
 public class RootController {
@@ -18,6 +20,9 @@ public class RootController {
 
     @Autowired
     private CatalogService catalogService;
+
+    @Autowired
+    private RecipeService recipeService;
 
     @GetMapping("/")
     public String root() {
@@ -38,8 +43,17 @@ public class RootController {
 //    }
 
     @GetMapping("/catalogs")
-    public String meals(Model model) {
+    public String catalogs(Model model) {
         model.addAttribute("catalogs", catalogService.getAll());
         return "catalogs";
+    }
+    @GetMapping("/recipies")
+    public String recipies( Model model) {
+        model.addAttribute("recipies", recipeService.getAll());
+        return "recipies";
+    }
+    private int getId(HttpServletRequest request) {
+        String paramId = Objects.requireNonNull(request.getParameter("id"));
+        return Integer.valueOf(paramId);
     }
 }

@@ -25,23 +25,15 @@ public class RootController  extends AbstractRecipeController {
     @Autowired
     private RecipeService recipeService;
 
-    @GetMapping("/")
-    public String root() {
-        return "index";
+    @GetMapping(value = "/login")
+    public String login() {
+        return "login";
     }
 
-//    @GetMapping("/users")
-//    public String users(Model model) {
-//        model.addAttribute("users", userService.getAll());
-//        return "users";
-//    }
-
-//    @PostMapping("/users")
-//    public String setUser(HttpServletRequest request) {
-//        int userId = Integer.valueOf(request.getParameter("userId"));
-//      //  AuthorizedUser.setId(userId);
-//        return "redirect:meals";
-//    }
+    @GetMapping("/")
+    public String root() {
+        return "redirect:/recipies";
+    }
 
     @GetMapping("/catalogs")
     public String catalogs(Model model) {
@@ -53,17 +45,14 @@ public class RootController  extends AbstractRecipeController {
         model.addAttribute("recipies", recipeService.getAll());
         return "recipies";
     }
-    @GetMapping("catalogs/getByRecipe")
-    public String getByIngredient(HttpServletRequest request, Model model) {
-        int catalogId = Integer.parseInt(request.getParameter("catalog"));
-        model.addAttribute("recipies", recipeService.getByCatalog(catalogId));
-        return "recipies";
-    }
+//    @GetMapping("catalogs/getByRecipe")
+//    public String getByIngredient(HttpServletRequest request, Model model) {
+//        int catalogId = Integer.parseInt(request.getParameter("catalog"));
+//        model.addAttribute("recipies", recipeService.getByCatalog(catalogId));
+//        return "recipies";
+//    }
 
-    private int getId(HttpServletRequest request) {
-        String paramId = Objects.requireNonNull(request.getParameter("id"));
-        return Integer.valueOf(paramId);
-    }
+
 
 
 }

@@ -46,14 +46,18 @@ public class JspRecipeController  extends AbstractRecipeController {
         Recipe recipe = new Recipe(request.getParameter("name"),
                 request.getParameter("description"),
                 request.getParameter("cookAlgorithm"));
-
-       // if (request.getParameter("id").isEmpty()) {
             super.create(recipe);
-//        } else {
-//            super.update(meal, getId(request));
-//        }
             return "redirect:/recipies";
+
         }
+
+    @PostMapping("/addRating")
+    public String addRating(HttpServletRequest request, Model model) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        model.addAttribute("recipies", super.getByUser(100000));
+      //  model.addAttribute("recipies", super.getByName(name));
+        return "recipies";
+    }
     }
 
 

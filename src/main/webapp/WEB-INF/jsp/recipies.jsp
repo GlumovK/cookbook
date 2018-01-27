@@ -1,19 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: Home
-  Date: 25.01.2018
-  Time: 12:58
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
-<head>
-    <title>Recipies</title>
-</head>
+<jsp:include page="fragments/headTag.jsp"/>
 <body>
+<jsp:include page="fragments/bodyHeader.jsp"/>
+
+
 <h3>Recipies</h3>
 <hr>
 <form method="post" action="recipies/getByName">
@@ -40,6 +34,8 @@
     <button type="submit">Искать</button>
 </form>
 
+
+
 <hr>
 <a href="recipies/create">Добавить рецепт</a>
 <hr>
@@ -52,6 +48,7 @@
         <th>ingredients</th>
         <th>user.name</th>
         <th>rating</th>
+
 
     </tr>
     </thead>
@@ -68,6 +65,8 @@
             </td>
             <td>${recipe.user.name}</td>
             <td>${recipe.rating}</td>
+            <td><a href="meals/addVote?id=${recipe.id}">+1</a></td>
+            <td><a href="meals/subtractVote?id=${recipe.id}">-1</a></td>
         </tr>
     </c:forEach>
 </table>

@@ -1,9 +1,10 @@
 package ru.dartIt;
 
+
 import ru.dartIt.model.AbstractBaseEntity;
 
-public class AuthorizedUser {
 
+public class AuthorizedUser   {
     private static int id = AbstractBaseEntity.START_SEQ;
 
     public static int id() {
@@ -13,4 +14,7 @@ public class AuthorizedUser {
     public static void setId(int id) {
         AuthorizedUser.id = id;
     }
+
+
+
 }

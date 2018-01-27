@@ -34,6 +34,7 @@ public class JpaRecipeRepositoryImpl implements RecipeRepository{
             return null;
         }
         recipe.setUser(em.getReference(User.class, userId));
+
         if (recipe.isNew()) {
             em.persist(recipe);
             return recipe;
@@ -96,6 +97,10 @@ public class JpaRecipeRepositoryImpl implements RecipeRepository{
     @Override
     public List<Recipe> getAll() {
         return em.createNamedQuery(Recipe.ALL, Recipe.class).getResultList();
+    }
+    @Override
+    public void addVote (int id){
+
     }
 }
 

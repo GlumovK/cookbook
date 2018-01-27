@@ -1,7 +1,6 @@
 package ru.dartIt;
 
 import ru.dartIt.model.Ingredient;
-import ru.dartIt.model.User;
 
 import java.util.Arrays;
 

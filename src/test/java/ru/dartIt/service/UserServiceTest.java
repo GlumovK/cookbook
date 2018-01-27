@@ -11,7 +11,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import ru.dartIt.model.User;
 import ru.dartIt.util.exception.NotFoundException;
 
-import java.util.Collections;
 import java.util.List;
 
 import static ru.dartIt.UserTestData.*;

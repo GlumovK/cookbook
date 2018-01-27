@@ -14,7 +14,7 @@ import ru.dartIt.service.UserService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;
 
-@Controller
+//@Controller
 public class RootController  extends AbstractRecipeController {
 //    @Autowired
 //    private UserService userService;

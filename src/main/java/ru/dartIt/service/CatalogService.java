@@ -1,7 +1,6 @@
 package ru.dartIt.service;
 
 import ru.dartIt.model.Catalog;
-import ru.dartIt.model.User;
 import ru.dartIt.util.exception.NotFoundException;
 
 import java.util.List;

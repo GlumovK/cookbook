@@ -2,12 +2,15 @@ package ru.dartIt.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import ru.dartIt.model.User;
+import ru.dartIt.repository.RoleRepository;
 import ru.dartIt.repository.UserRepository;
 import ru.dartIt.util.exception.NotFoundException;
 
+import java.util.HashSet;
 import java.util.List;
 
 import static ru.dartIt.util.ValidationUtil.checkNotFound;
@@ -16,12 +19,28 @@ import static ru.dartIt.util.ValidationUtil.checkNotFoundWithId;
 @Service
 public class UserServiceImpl implements UserService {
 
+    @Autowired
     private final UserRepository repository;
+
+    @Autowired
+    private RoleRepository roleRepository;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     public UserServiceImpl(UserRepository repository) {
         this.repository = repository;
     }
+
+    @Override
+    public void save(User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+     //   user.setRoles(new HashSet<>(roleRepository.findAll()));
+        repository.save(user);
+    }
+
+
 
     @Override
     public User create(User user) {

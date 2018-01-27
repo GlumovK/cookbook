@@ -1,7 +1,6 @@
 package ru.dartIt.repository;
 
 import ru.dartIt.model.Catalog;
-import ru.dartIt.model.User;
 
 
 import java.util.List;

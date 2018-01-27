@@ -1,21 +1,15 @@
 package ru.dartIt.repository;
 
 
-import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import ru.dartIt.model.Catalog;
 import ru.dartIt.model.Recipe;
 import ru.dartIt.model.User;
 
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Set;
 
 @Repository
 @Transactional(readOnly = true)

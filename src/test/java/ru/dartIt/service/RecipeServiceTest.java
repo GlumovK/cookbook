@@ -81,5 +81,12 @@ public void getByIngredient() throws Exception {
         assertMatch(all, BORSCH, MUSHROOM_SOUP);
     }
 
+    @Test
+    public void update() throws Exception {
+        Recipe updated = getUpdated();
+        service.update(updated, USER_ID);
+        assertMatch(service.get(BORSCH_ID), updated);
+    }
+
 
 }

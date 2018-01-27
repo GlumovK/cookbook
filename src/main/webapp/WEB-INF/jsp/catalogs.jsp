@@ -20,7 +20,7 @@
     <c:forEach items="${catalogs}" var="catalog">
         <jsp:useBean id="catalog" scope="page" type="ru.dartIt.model.Catalog"/>
         <tr>
-            <td> <a href="catalogs/getByRecipe" >${catalog.name}</a></td>
+            <td> <a href="recipies" >${catalog.name}</a></td>
         </tr>
     </c:forEach>
 </table>

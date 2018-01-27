@@ -23,7 +23,9 @@ public class RecipeTestData {
     public static final Recipe OMELETTE = new Recipe(BORSCH_ID+3, "Omelette", "Жареные яйца", "алгоритм яишницы", 11);
     public static final Recipe CAPPUCCINO = new Recipe(BORSCH_ID+4, "Cappuccino", "Кофе с молоком", "алгоритм капучино", 42);
 
-
+    public static Recipe getUpdated() {
+        return new Recipe(BORSCH_ID, "Borsch", "Суп со свеклой", "алгоритм борща",  33);
+    }
 
 
     public static void assertMatch(Recipe actual, Recipe expected) {

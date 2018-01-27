@@ -4,6 +4,7 @@ package ru.dartIt.repository;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
 import ru.dartIt.model.Catalog;
 import ru.dartIt.model.Recipe;
 import ru.dartIt.model.User;
@@ -12,6 +13,7 @@ import ru.dartIt.model.User;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Set;
 
@@ -53,6 +55,11 @@ public class JpaRecipeRepositoryImpl implements RecipeRepository{
         Recipe meal = em.find(Recipe.class, id);
         return meal != null && meal.getUser().getId() == userId ? meal : null;
     }
+
+//    @Override
+//    public void addVote(int id) {
+//
+//    }
 
     @Override
     @Transactional
@@ -98,10 +105,11 @@ public class JpaRecipeRepositoryImpl implements RecipeRepository{
     public List<Recipe> getAll() {
         return em.createNamedQuery(Recipe.ALL, Recipe.class).getResultList();
     }
-    @Override
-    public void addVote (int id){
+//    @Override
+//    public void addVote (int id){
+//
+//    }
 
-    }
 }
 
 

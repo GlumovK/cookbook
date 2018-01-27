@@ -34,6 +34,13 @@ public class JspRecipeController  extends AbstractRecipeController {
         return "recipies";
     }
 
+    @PostMapping("/getByCatalog")
+    public String getByCatalog(HttpServletRequest request, Model model) {
+        int catalogId = Integer.parseInt(request.getParameter("catalog"));
+        model.addAttribute("recipies", super.getByCatalog(catalogId));
+        return "recipies";
+    }
+
     @PostMapping("/getByName")
     public String getByName(HttpServletRequest request, Model model) {
         String name = request.getParameter("name");
@@ -51,13 +58,20 @@ public class JspRecipeController  extends AbstractRecipeController {
 
         }
 
-    @PostMapping("/addRating")
-    public String addRating(HttpServletRequest request, Model model) {
+
+    @GetMapping("/addVote")
+    public String addVote(HttpServletRequest request) {
         int id = Integer.parseInt(request.getParameter("id"));
-        model.addAttribute("recipies", super.getByUser(100000));
-      //  model.addAttribute("recipies", super.getByName(name));
-        return "recipies";
+        super.addVote(id);
+        return "redirect:/recipies";
     }
+    @GetMapping("/subtractVote")
+    public String subtractVote(HttpServletRequest request) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        super.subtractVote(id);
+        return "redirect:/recipies";
+    }
+
     }
 
 

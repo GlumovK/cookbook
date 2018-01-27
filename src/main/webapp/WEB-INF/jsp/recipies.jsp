@@ -33,6 +33,13 @@
     </dl>
     <button type="submit">Искать</button>
 </form>
+<form method="post" action="recipies/getByCatalog">
+<dl>
+    <dt>Искать рецепт по каталогу</dt>
+    <dd><input type="text" name="catalog" value="${param.catalog}"></dd>
+</dl>
+<button type="submit">Искать</button>
+</form>
 
 
 
@@ -48,6 +55,8 @@
         <th>ingredients</th>
         <th>user.name</th>
         <th>rating</th>
+        <th></th>
+        <th></th>
 
 
     </tr>
@@ -65,8 +74,8 @@
             </td>
             <td>${recipe.user.name}</td>
             <td>${recipe.rating}</td>
-            <td><a href="meals/addVote?id=${recipe.id}">+1</a></td>
-            <td><a href="meals/subtractVote?id=${recipe.id}">-1</a></td>
+            <td><a href="recipies/addVote?id=${recipe.id}">+1</a></td>
+            <td><a href="recipies/subtractVote?id=${recipe.id}">-1</a></td>
         </tr>
     </c:forEach>
 </table>

@@ -19,7 +19,7 @@ public interface RecipeRepository {
 
     Recipe get(int id, int userId);
 
- void addVote (int id);
+ //void addVote (int id);
 
 
     List<Recipe> getByName(String name);

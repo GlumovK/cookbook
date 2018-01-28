@@ -29,6 +29,7 @@
 
         <br/>
         <p>
+            <a class="btn btn-lg btn-success" href="register">Register &raquo;</a>
             <button type="submit" class="btn btn-lg btn-primary" onclick="setCredentials('user@yandex.ru', 'password')">
               User
             </button>

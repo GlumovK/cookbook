@@ -3,19 +3,26 @@ package ru.dartIt.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.support.SessionStatus;
+import ru.dartIt.AuthorizedUser;
 import ru.dartIt.service.CatalogService;
 import ru.dartIt.service.RecipeService;
 import ru.dartIt.service.UserService;
+import ru.dartIt.to.UserTo;
+import ru.dartIt.util.UserUtil;
 
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.Objects;
 
 @Controller
-public class RootController  extends AbstractRecipeController {
+public class RootController extends AbstractUserController  {
 //    @Autowired
 //    private UserService userService;
 //
@@ -45,12 +52,34 @@ public class RootController  extends AbstractRecipeController {
         model.addAttribute("recipies", recipeService.getAll());
         return "recipies";
     }
-//    @GetMapping("catalogs/getByRecipe")
-//    public String getByIngredient(HttpServletRequest request, Model model) {
-//        int catalogId = Integer.parseInt(request.getParameter("catalog"));
-//        model.addAttribute("recipies", recipeService.getByCatalog(catalogId));
-//        return "recipies";
-//    }
+    @PostMapping("/profile")
+    public String updateProfile(@Valid UserTo userTo, BindingResult result, SessionStatus status) {
+        if (result.hasErrors()) {
+            return "profile";
+        } else {
+            super.update(userTo, AuthorizedUser.id());
+            AuthorizedUser.get().update(userTo);
+            status.setComplete();
+            return "redirect:meals";
+        }
+    }
+    @GetMapping("/register")
+    public String register(ModelMap model) {
+        model.addAttribute("userTo", new UserTo());
+        model.addAttribute("register", true);
+        return "profile";
+    }
+    @PostMapping("/register")
+    public String saveRegister(@Valid UserTo userTo, BindingResult result, SessionStatus status, ModelMap model) {
+        if (result.hasErrors()) {
+            model.addAttribute("register", true);
+            return "profile";
+        } else {
+            super.create(UserUtil.createNewFromTo(userTo));
+            status.setComplete();
+            return "redirect:login?message=app.registered&username=" + userTo.getEmail();
+        }
+    }
 
 
 

@@ -2,6 +2,7 @@ package ru.dartIt.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,6 +13,8 @@ import org.springframework.util.Assert;
 import ru.dartIt.AuthorizedUser;
 import ru.dartIt.model.User;
 import ru.dartIt.repository.UserRepository;
+import ru.dartIt.to.UserTo;
+import ru.dartIt.util.UserUtil;
 import ru.dartIt.util.exception.NotFoundException;
 
 import java.util.HashSet;
@@ -77,5 +80,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         }
         return new AuthorizedUser(user);
 
+    }
+
+    @Override
+    public void update(UserTo userTo) {
+        User user = get(userTo.getId());
+        repository.save(UserUtil.updateFromTo(user, userTo));
     }
     }

@@ -1,6 +1,7 @@
 package ru.dartIt.service;
 
 import ru.dartIt.model.User;
+import ru.dartIt.to.UserTo;
 import ru.dartIt.util.exception.NotFoundException;
 
 import java.util.List;
@@ -19,4 +20,6 @@ public interface UserService {
     List<User> getAll();
 
     void enable(int id, boolean enable);
+
+    void update(UserTo user);
 }

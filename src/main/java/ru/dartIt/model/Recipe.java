@@ -19,9 +19,9 @@ import java.util.Set;
 @NamedQueries({
         @NamedQuery(name = Recipe.ALL, query = "SELECT r FROM Recipe r "),
         @NamedQuery(name = Recipe.DELETE, query = "DELETE FROM Recipe r WHERE r.id=:id"),
-        @NamedQuery(name = Recipe.BY_INGREDIENT, query = "SELECT r FROM Recipe r join r.ingredients i WHERE i.id=?1"),
-        @NamedQuery(name = Recipe.BY_CATALOG, query = "SELECT r FROM Recipe r join r.catalogs c WHERE c.id=?1"),
-        @NamedQuery(name = Recipe.BY_USER, query = "SELECT r FROM Recipe r WHERE r.user.id=?1"),
+        @NamedQuery(name = Recipe.BY_INGREDIENT, query = "SELECT r FROM Recipe r join r.ingredients i WHERE i.name=?1"),
+        @NamedQuery(name = Recipe.BY_CATALOG, query = "SELECT r FROM Recipe r join r.catalogs c WHERE c.name=?1"),
+        @NamedQuery(name = Recipe.BY_USER, query = "SELECT r FROM Recipe r WHERE r.user.name=?1"),
         @NamedQuery(name = Recipe.BY_NAME, query = "SELECT r FROM Recipe r WHERE r.name=?1"),
 
         // "SELECT p FROM Provider p join p.categories c WHERE c.title=:title"

@@ -18,11 +18,11 @@ public interface RecipeService {
     //  void update(Recipe recipe);
     Recipe update(Recipe recipe, int userId) throws NotFoundException;
 
-    List<Recipe> getByIngredient(int ingredientId);
+    List<Recipe> getByIngredient(String ingredientName);
 
-    List<Recipe> getByCatalog(int catalogId);
+    List<Recipe> getByCatalog(String catalogName);
 
-    List<Recipe> getByUser(int userId);
+    List<Recipe> getByUser(String userName);
 
     List<Recipe> getByName(String name);
 

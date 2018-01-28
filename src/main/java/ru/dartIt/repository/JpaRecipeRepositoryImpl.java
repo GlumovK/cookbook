@@ -70,9 +70,9 @@ public class JpaRecipeRepositoryImpl implements RecipeRepository{
     }
 
     @Override
-    public List<Recipe> getByIngredient(int ingredientId) {
+    public List<Recipe> getByIngredient(String ingredientName) {
         List<Recipe> recipes = em.createNamedQuery(Recipe.BY_INGREDIENT, Recipe.class)
-                .setParameter(1, ingredientId)
+                .setParameter(1, ingredientName)
         .getResultList();
         return recipes;
     }
@@ -86,17 +86,17 @@ public class JpaRecipeRepositoryImpl implements RecipeRepository{
     }
 
     @Override
-    public List<Recipe> getByCatalog(int catalogId) {
+    public List<Recipe> getByCatalog(String catalogName) {
         List<Recipe> recipes = em.createNamedQuery(Recipe.BY_CATALOG, Recipe.class)
-                .setParameter(1, catalogId)
+                .setParameter(1, catalogName)
                 .getResultList();
         return recipes;
     }
 
     @Override
-    public List<Recipe> getByUser(int userId) {
+    public List<Recipe> getByUser(String userName) {
         List<Recipe> recipes = em.createNamedQuery(Recipe.BY_USER, Recipe.class)
-                .setParameter(1, userId)
+                .setParameter(1, userName)
                 .getResultList();
         return recipes;
     }

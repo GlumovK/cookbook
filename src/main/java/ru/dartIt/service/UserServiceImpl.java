@@ -61,11 +61,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return repository.getAll();
     }
 
-    @Override
-    public void update(User user) {
-        Assert.notNull(user, "user must not be null");
-        checkNotFoundWithId(repository.save(user), user.getId());
-    }
+//    @Override
+//    public void update(User user) {
+//        Assert.notNull(user, "user must not be null");
+//        checkNotFoundWithId(repository.save(user), user.getId());
+//    }
     @Override
     public void enable(int id, boolean enabled) {
         User user = get(id);

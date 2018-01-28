@@ -24,11 +24,11 @@ public interface RecipeRepository {
 
     List<Recipe> getByName(String name);
 
-    List<Recipe> getByIngredient(int ingredientId);
+    List<Recipe> getByIngredient(String ingredientName);
 
-    List<Recipe> getByCatalog(int catalogId);
+    List<Recipe> getByCatalog(String catalogName);
 
-    List<Recipe> getByUser(int userId);
+    List<Recipe> getByUser(String userName);
 
     List<Recipe> getAll();
 }

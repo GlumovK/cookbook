@@ -71,7 +71,7 @@
 <%--</form>--%>
         <form  method="post" action="recipies/getByCatalog">
             <div class="form-group">
-                <label for="catalog">Искать рецепт по каталогу</label>
+                <label for="catalog">Искать рецепт по каталогу (Soup, Second course, Snack, Salad, Drink)</label>
                 <input type="text"  class="form-control"  id="catalog"  value="${param.catalog}" placeholder="Enter catalog" name="catalog">
             </div>
             <button type="submit" class="btn btn-default">Submit</button>

@@ -60,13 +60,13 @@ public class UserServiceTest {
         User user = service.getByEmail("user@yandex.ru");
         assertMatch(user, USER);
     }
-    @Test
-    public void update() throws Exception {
-        User updated = new User(USER);
-        updated.setName("UpdatedName");
-        service.update(updated);
-        assertMatch(service.get(USER_ID), updated);
-    }
+//    @Test
+//    public void update() throws Exception {
+//        User updated = new User(USER);
+//        updated.setName("UpdatedName");
+//        service.update(updated);
+//        assertMatch(service.get(USER_ID), updated);
+//    }
     @Test(expected = NotFoundException.class)
     public void getNotFound() throws Exception {
         service.get(1);

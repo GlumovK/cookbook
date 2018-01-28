@@ -1,16 +1,17 @@
 package ru.dartIt.web;
 
-import org.springframework.format.annotation.DateTimeFormat;
+
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
 import ru.dartIt.model.Recipe;
 
 import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDateTime;
+
 
 
 @Controller
@@ -25,22 +26,22 @@ public class JspRecipeController  extends AbstractRecipeController {
 
     @PostMapping("/getByUser")
     public String getByUser(HttpServletRequest request, Model model) {
-        int userId = Integer.parseInt(request.getParameter("user"));
-        model.addAttribute("recipies", super.getByUser(userId));
+        String userName = request.getParameter("user");
+        model.addAttribute("recipies", super.getByUser(userName));
         return "recipies";
     }
 
     @PostMapping("/getByIngredient")
     public String getByIngredient(HttpServletRequest request, Model model) {
-        int ingredientId = Integer.parseInt(request.getParameter("ingredient"));
-        model.addAttribute("recipies", super.getByIngredient(ingredientId));
+        String ingredientName = request.getParameter("ingredient");
+        model.addAttribute("recipies", super.getByIngredient(ingredientName));
         return "recipies";
     }
 
     @PostMapping("/getByCatalog")
     public String getByCatalog(HttpServletRequest request, Model model) {
-        int catalogId = Integer.parseInt(request.getParameter("catalog"));
-        model.addAttribute("recipies", super.getByCatalog(catalogId));
+        String catalogName = request.getParameter("catalog");
+        model.addAttribute("recipies", super.getByCatalog(catalogName));
         return "recipies";
     }
 

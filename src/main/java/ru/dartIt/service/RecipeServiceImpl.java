@@ -43,15 +43,15 @@ public class RecipeServiceImpl implements RecipeService{
     public Recipe get(int id) throws NotFoundException {
         return checkNotFoundWithId(repository.get(id), id);
     }
-    public List<Recipe> getByIngredient(int ingredientId){
-        Assert.notNull(ingredientId, "ingredientId must not be null");
-        return repository.getByIngredient(ingredientId);
+    public List<Recipe> getByIngredient(String ingredientName){
+        Assert.notNull(ingredientName, "ingredientName must not be null");
+        return repository.getByIngredient(ingredientName);
     }
 
     @Override
-    public List<Recipe> getByCatalog(int catalogId) {
-        Assert.notNull(catalogId, "catalogId must not be null");
-        return repository.getByCatalog(catalogId);
+    public List<Recipe> getByCatalog(String catalogName) {
+        Assert.notNull(catalogName, "catalogName must not be null");
+        return repository.getByCatalog(catalogName);
     }
     @Override
     public List<Recipe> getByName(String name){
@@ -60,9 +60,9 @@ public class RecipeServiceImpl implements RecipeService{
     }
 
     @Override
-    public List<Recipe> getByUser(int userId){
-        Assert.notNull(userId, "userId must not be null");
-        return repository.getByUser(userId);
+    public List<Recipe> getByUser(String userName){
+        Assert.notNull(userName, "userName must not be null");
+        return repository.getByUser(userName);
     }
 
     @Override

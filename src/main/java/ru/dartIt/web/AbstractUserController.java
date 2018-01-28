@@ -40,11 +40,7 @@ public abstract class AbstractUserController {
         service.delete(id);
     }
 
-    public void update(User user, int id) {
 
-        assureIdConsistent(user, id);
-        service.update(user);
-    }
 
     public void update(UserTo userTo, int id) {
 

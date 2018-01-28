@@ -15,19 +15,19 @@ public class AbstractRecipeController {
     @Autowired
     private RecipeService service;
 
-    public List<Recipe> getByUser(int userId) {
-        return service.getByUser(userId);
+    public List<Recipe> getByUser(String userName) {
+        return service.getByUser(userName);
     }
 
-    public List<Recipe>  getByIngredient(int ingredientId) {
-        return service.getByIngredient(ingredientId);
+    public List<Recipe>  getByIngredient(String ingredientName) {
+        return service.getByIngredient(ingredientName);
     }
 
     public List<Recipe>  getByName(String name) {
         return service.getByName(name);
     }
-    public List<Recipe> getByCatalog(int catalogId) {
-        return service.getByCatalog(catalogId);
+    public List<Recipe> getByCatalog(String catalogName) {
+        return service.getByCatalog(catalogName);
     }
 
     public Recipe create(Recipe recipe) {

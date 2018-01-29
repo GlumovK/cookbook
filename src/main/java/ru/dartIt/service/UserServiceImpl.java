@@ -1,11 +1,15 @@
 package ru.dartIt.service;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import ru.dartIt.AuthorizedUser;
 import ru.dartIt.model.User;
 import ru.dartIt.repository.UserRepository;
+import ru.dartIt.to.UserTo;
+import ru.dartIt.util.UserUtil;
 import ru.dartIt.util.exception.NotFoundException;
 
 import java.util.List;
@@ -13,8 +17,8 @@ import java.util.List;
 import static ru.dartIt.util.ValidationUtil.checkNotFound;
 import static ru.dartIt.util.ValidationUtil.checkNotFoundWithId;
 
-@Service
-public class UserServiceImpl implements UserService {
+@Service("userService")
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserRepository repository;
 
@@ -51,8 +55,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void update(User user) {
-        Assert.notNull(user, "user must not be null");
-        checkNotFoundWithId(repository.save(user), user.getId());
+    public void enable(int id, boolean enabled) {
+        User user = get(id);
+        user.setEnabled(enabled);
+        repository.save(user);
+    }
+
+    @Override
+    public AuthorizedUser loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = repository.getByEmail(email.toLowerCase());
+        if (user == null) {
+            throw new UsernameNotFoundException("User " + email + " is not found");
+        }
+        return new AuthorizedUser(user);
+    }
+
+    @Override
+    public void update(UserTo userTo) {
+        User user = get(userTo.getId());
+        repository.save(UserUtil.updateFromTo(user, userTo));
     }
 }

@@ -1,5 +1,6 @@
 package ru.dartIt.web;
 
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,10 +10,9 @@ import ru.dartIt.model.Recipe;
 
 import javax.servlet.http.HttpServletRequest;
 
-
 @Controller
 @RequestMapping(value = "/recipies")
-public class JspRecipeController  extends AbstractRecipeController {
+public class JspRecipeController extends AbstractRecipeController {
 
     @GetMapping("/create")
     public String create(Model model) {
@@ -22,22 +22,22 @@ public class JspRecipeController  extends AbstractRecipeController {
 
     @PostMapping("/getByUser")
     public String getByUser(HttpServletRequest request, Model model) {
-        int userId = Integer.parseInt(request.getParameter("user"));
-        model.addAttribute("recipies", super.getByUser(userId));
+        String userName = request.getParameter("user");
+        model.addAttribute("recipies", super.getByUser(userName));
         return "recipies";
     }
 
     @PostMapping("/getByIngredient")
     public String getByIngredient(HttpServletRequest request, Model model) {
-        int ingredientId = Integer.parseInt(request.getParameter("ingredient"));
-        model.addAttribute("recipies", super.getByIngredient(ingredientId));
+        String ingredientName = request.getParameter("ingredient");
+        model.addAttribute("recipies", super.getByIngredient(ingredientName));
         return "recipies";
     }
 
     @PostMapping("/getByCatalog")
     public String getByCatalog(HttpServletRequest request, Model model) {
-        int catalogId = Integer.parseInt(request.getParameter("catalog"));
-        model.addAttribute("recipies", super.getByCatalog(catalogId));
+        String catalogName = request.getParameter("catalog");
+        model.addAttribute("recipies", super.getByCatalog(catalogName));
         return "recipies";
     }
 
@@ -53,11 +53,9 @@ public class JspRecipeController  extends AbstractRecipeController {
         Recipe recipe = new Recipe(request.getParameter("name"),
                 request.getParameter("description"),
                 request.getParameter("cookAlgorithm"));
-            super.create(recipe);
-            return "redirect:/recipies";
-
-        }
-
+        super.create(recipe);
+        return "redirect:/recipies";
+    }
 
     @GetMapping("/addVote")
     public String addVote(HttpServletRequest request) {
@@ -65,13 +63,13 @@ public class JspRecipeController  extends AbstractRecipeController {
         super.addVote(id);
         return "redirect:/recipies";
     }
+
     @GetMapping("/subtractVote")
     public String subtractVote(HttpServletRequest request) {
         int id = Integer.parseInt(request.getParameter("id"));
         super.subtractVote(id);
         return "redirect:/recipies";
     }
-
-    }
+}
 
 

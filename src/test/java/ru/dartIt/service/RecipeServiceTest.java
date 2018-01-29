@@ -10,12 +10,12 @@ import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringRunner;
 import ru.dartIt.model.Recipe;
 
-
 import java.util.List;
 
-import static ru.dartIt.CatalogTestData.SOUP_ID;
-import static ru.dartIt.IngredientTestData.POTATOES_ID;
+import static ru.dartIt.CatalogTestData.SOUP;
+import static ru.dartIt.IngredientTestData.POTATOES;
 import static ru.dartIt.RecipeTestData.*;
+import static ru.dartIt.UserTestData.USER;
 import static ru.dartIt.UserTestData.USER_ID;
 
 
@@ -40,44 +40,42 @@ public class RecipeServiceTest {
         Recipe recipe = service.get(BORSCH_ID);
         assertMatch(recipe, BORSCH);
     }
+
     @Test
     public void getAll() throws Exception {
         List<Recipe> all = service.getAll();
         assertMatch(all, BORSCH, MUSHROOM_SOUP, OLIVIE, OMELETTE, CAPPUCCINO);
     }
+
     @Test
     public void create() throws Exception {
-        Recipe newRecipe = new Recipe( "New", "New desc", "New Algo");
+        Recipe newRecipe = new Recipe("New", "New desc", "New Algo");
         Recipe created = service.create(newRecipe, USER_ID);
-       // newRecipe.setId(created.getId());
+         newRecipe.setId(created.getId());
         assertMatch(service.getAll(), BORSCH, MUSHROOM_SOUP, OLIVIE, OMELETTE, CAPPUCCINO, newRecipe);
     }
-@Test
-public void getByIngredient() throws Exception {
-    List<Recipe> all = service.getByIngredient(POTATOES_ID);
-    assertMatch(all, BORSCH, MUSHROOM_SOUP, OLIVIE);
-}
+
+    @Test
+    public void getByIngredient() throws Exception {
+        List<Recipe> all = service.getByIngredient(POTATOES.getName());
+        assertMatch(all, BORSCH, MUSHROOM_SOUP, OLIVIE);
+    }
 
     @Test
     public void getByCatalog() throws Exception {
-        List<Recipe> all = service.getByCatalog(SOUP_ID);
+        List<Recipe> all = service.getByCatalog(SOUP.getName());
         assertMatch(all, BORSCH, MUSHROOM_SOUP);
     }
 
-        @Test
-        public void getByName() throws Exception {
-            List<Recipe> all = service.getByName("Borsch");
-            assertMatch(all, BORSCH);
+    @Test
+    public void getByName() throws Exception {
+        List<Recipe> all = service.getByName("Borsch");
+        assertMatch(all, BORSCH);
     }
+
     @Test
     public void getByUser() throws Exception {
-        List<Recipe> all = service.getByUser(USER_ID);
-        System.out.println("!!!");
-        for (Recipe recipe : all) {
-            // recipe.getName();
-            System.out.println( recipe.getName());
-        }
-        System.out.println("!!!");
+        List<Recipe> all = service.getByUser(USER.getName());
         assertMatch(all, BORSCH, MUSHROOM_SOUP);
     }
 
@@ -87,6 +85,4 @@ public void getByIngredient() throws Exception {
         service.update(updated, USER_ID);
         assertMatch(service.get(BORSCH_ID), updated);
     }
-
-
 }

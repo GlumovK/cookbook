@@ -1,14 +1,13 @@
 package ru.dartIt.model;
 
-
+import org.hibernate.Hibernate;
+import ru.dartIt.HasId;
 
 import javax.persistence.*;
 
 @MappedSuperclass
-
-// http://stackoverflow.com/questions/594597/hibernate-annotations-which-is-better-field-or-property-access
 @Access(AccessType.FIELD)
-public abstract class AbstractBaseEntity  {
+public abstract class AbstractBaseEntity implements HasId {
     public static final int START_SEQ = 100000;
 
     @Id
@@ -46,9 +45,9 @@ public abstract class AbstractBaseEntity  {
         if (this == o) {
             return true;
         }
-//        if (o == null || !getClass().equals(Hibernate.getClass(o))) {
-//            return false;
-//        }
+        if (o == null || !getClass().equals(Hibernate.getClass(o))) {
+            return false;
+        }
         AbstractBaseEntity that = (AbstractBaseEntity) o;
         return id != null && id.equals(that.id);
     }

@@ -3,66 +3,80 @@ package ru.dartIt.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.support.SessionStatus;
+import ru.dartIt.AuthorizedUser;
 import ru.dartIt.service.CatalogService;
 import ru.dartIt.service.RecipeService;
-import ru.dartIt.service.UserService;
+import ru.dartIt.to.UserTo;
+import ru.dartIt.util.UserUtil;
 
+import javax.validation.Valid;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.Objects;
 
 @Controller
-public class RootController  extends AbstractRecipeController {
-//    @Autowired
-//    private UserService userService;
-//
+public class RootController extends AbstractUserController {
+
     @Autowired
     private CatalogService catalogService;
 
     @Autowired
     private RecipeService recipeService;
 
-    @GetMapping("/")
-    public String root() {
-        return "index";
+    @GetMapping(value = "/login")
+    public String login() {
+        return "login";
     }
 
-//    @GetMapping("/users")
-//    public String users(Model model) {
-//        model.addAttribute("users", userService.getAll());
-//        return "users";
-//    }
-
-//    @PostMapping("/users")
-//    public String setUser(HttpServletRequest request) {
-//        int userId = Integer.valueOf(request.getParameter("userId"));
-//      //  AuthorizedUser.setId(userId);
-//        return "redirect:meals";
-//    }
+    @GetMapping("/")
+    public String root() {
+        return "redirect:/recipies";
+    }
 
     @GetMapping("/catalogs")
     public String catalogs(Model model) {
         model.addAttribute("catalogs", catalogService.getAll());
         return "catalogs";
     }
+
     @GetMapping("/recipies")
-    public String recipies( Model model) {
+    public String recipies(Model model) {
         model.addAttribute("recipies", recipeService.getAll());
         return "recipies";
     }
-    @GetMapping("catalogs/getByRecipe")
-    public String getByIngredient(HttpServletRequest request, Model model) {
-        int catalogId = Integer.parseInt(request.getParameter("catalog"));
-        model.addAttribute("recipies", recipeService.getByCatalog(catalogId));
-        return "recipies";
+
+    @PostMapping("/profile")
+    public String updateProfile(@Valid UserTo userTo, BindingResult result, SessionStatus status) {
+        if (result.hasErrors()) {
+            return "profile";
+        } else {
+            super.update(userTo, AuthorizedUser.id());
+            AuthorizedUser.get().update(userTo);
+            status.setComplete();
+            return "redirect:meals";
+        }
     }
 
-    private int getId(HttpServletRequest request) {
-        String paramId = Objects.requireNonNull(request.getParameter("id"));
-        return Integer.valueOf(paramId);
+    @GetMapping("/register")
+    public String register(ModelMap model) {
+        model.addAttribute("userTo", new UserTo());
+        model.addAttribute("register", true);
+        return "profile";
+    }
+
+    @PostMapping("/register")
+    public String saveRegister(@Valid UserTo userTo, BindingResult result, SessionStatus status, ModelMap model) {
+        if (result.hasErrors()) {
+            model.addAttribute("register", true);
+            return "profile";
+        } else {
+            super.create(UserUtil.createNewFromTo(userTo));
+            status.setComplete();
+            return "redirect:login?message=app.registered&username=" + userTo.getEmail();
+        }
     }
 
 

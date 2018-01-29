@@ -4,9 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import ru.dartIt.model.Catalog;
-import ru.dartIt.model.User;
 import ru.dartIt.repository.CatalogRepository;
-import ru.dartIt.repository.UserRepository;
 import ru.dartIt.util.exception.NotFoundException;
 
 import java.util.List;

@@ -1,33 +1,21 @@
 package ru.dartIt.repository;
 
 
-import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import ru.dartIt.model.Catalog;
 import ru.dartIt.model.Recipe;
 import ru.dartIt.model.User;
 
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Set;
 
 @Repository
 @Transactional(readOnly = true)
-public class JpaRecipeRepositoryImpl implements RecipeRepository{
-
+public class RecipeRepositoryImpl implements RecipeRepository {
 
     @PersistenceContext
     private EntityManager em;
-
-
-
-
 
     @Override
     @Transactional
@@ -56,11 +44,6 @@ public class JpaRecipeRepositoryImpl implements RecipeRepository{
         return meal != null && meal.getUser().getId() == userId ? meal : null;
     }
 
-//    @Override
-//    public void addVote(int id) {
-//
-//    }
-
     @Override
     @Transactional
     public boolean delete(int id) {
@@ -70,15 +53,15 @@ public class JpaRecipeRepositoryImpl implements RecipeRepository{
     }
 
     @Override
-    public List<Recipe> getByIngredient(int ingredientId) {
+    public List<Recipe> getByIngredient(String ingredientName) {
         List<Recipe> recipes = em.createNamedQuery(Recipe.BY_INGREDIENT, Recipe.class)
-                .setParameter(1, ingredientId)
-        .getResultList();
+                .setParameter(1, ingredientName)
+                .getResultList();
         return recipes;
     }
 
     @Override
-    public List<Recipe> getByName(String name){
+    public List<Recipe> getByName(String name) {
         List<Recipe> recipes = em.createNamedQuery(Recipe.BY_NAME, Recipe.class)
                 .setParameter(1, name)
                 .getResultList();
@@ -86,17 +69,17 @@ public class JpaRecipeRepositoryImpl implements RecipeRepository{
     }
 
     @Override
-    public List<Recipe> getByCatalog(int catalogId) {
+    public List<Recipe> getByCatalog(String catalogName) {
         List<Recipe> recipes = em.createNamedQuery(Recipe.BY_CATALOG, Recipe.class)
-                .setParameter(1, catalogId)
+                .setParameter(1, catalogName)
                 .getResultList();
         return recipes;
     }
 
     @Override
-    public List<Recipe> getByUser(int userId) {
+    public List<Recipe> getByUser(String userName) {
         List<Recipe> recipes = em.createNamedQuery(Recipe.BY_USER, Recipe.class)
-                .setParameter(1, userId)
+                .setParameter(1, userName)
                 .getResultList();
         return recipes;
     }
@@ -105,11 +88,6 @@ public class JpaRecipeRepositoryImpl implements RecipeRepository{
     public List<Recipe> getAll() {
         return em.createNamedQuery(Recipe.ALL, Recipe.class).getResultList();
     }
-//    @Override
-//    public void addVote (int id){
-//
-//    }
-
 }
 
 

@@ -5,16 +5,13 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.dartIt.model.User;
 
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
 @Transactional(readOnly = true)
-public class JpaUserRepositoryImpl implements UserRepository {
-
-
+public class UserRepositoryImpl implements UserRepository {
 
     @PersistenceContext
     private EntityManager em;
@@ -38,13 +35,6 @@ public class JpaUserRepositoryImpl implements UserRepository {
     @Override
     @Transactional
     public boolean delete(int id) {
-
-/*      User ref = em.getReference(User.class, id);
-        em.remove(ref);
-
-        Query query = em.createQuery("DELETE FROM User u WHERE u.id=:id");
-        return query.setParameter("id", id).executeUpdate() != 0;
-*/
         return em.createNamedQuery(User.DELETE)
                 .setParameter("id", id)
                 .executeUpdate() != 0;

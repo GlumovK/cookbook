@@ -27,4 +27,5 @@ public class CatalogTestData {
     public static void assertMatch(Iterable<Catalog> actual, Iterable<Catalog> expected) {
         assertThat(actual).isEqualTo(expected);
     }
+
 }

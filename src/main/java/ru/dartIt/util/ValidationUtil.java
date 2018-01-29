@@ -1,6 +1,5 @@
 package ru.dartIt.util;
 
-
 import ru.dartIt.model.AbstractBaseEntity;
 import ru.dartIt.util.exception.NotFoundException;
 
@@ -35,7 +34,6 @@ public class ValidationUtil {
     }
 
     public static void assureIdConsistent(AbstractBaseEntity entity, int id) {
-
         if (entity.isNew()) {
             entity.setId(id);
         } else if (entity.getId() != id) {

@@ -1,11 +1,9 @@
 package ru.dartIt.model;
 
-
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import java.util.List;
 
 @NamedQueries({
         @NamedQuery(name = Catalog.DELETE, query = "DELETE FROM Catalog c WHERE c.id=:id"),
@@ -15,7 +13,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "catalogs")
-public class Catalog extends AbstractNamedEntity{
+public class Catalog extends AbstractNamedEntity {
 
     public static final String DELETE = "Catalog.delete";
     public static final String BY_NAME = "Catalog.getByName";
@@ -31,8 +29,6 @@ public class Catalog extends AbstractNamedEntity{
     public Catalog(Integer id, String name) {
         super(id, name);
     }
-
-    //protected List<Recipe> recipes;
 
     @Override
     public String toString() {

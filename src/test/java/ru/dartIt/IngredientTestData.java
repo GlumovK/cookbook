@@ -1,7 +1,6 @@
 package ru.dartIt;
 
 import ru.dartIt.model.Ingredient;
-import ru.dartIt.model.User;
 
 import java.util.Arrays;
 
@@ -11,7 +10,6 @@ import static ru.dartIt.model.AbstractBaseEntity.START_SEQ;
 public class IngredientTestData {
 
     public static final int POTATOES_ID = START_SEQ + 12;
-
 
     public static final Ingredient POTATOES = new Ingredient(POTATOES_ID, "Potatoes");
     public static final Ingredient BEET = new Ingredient(POTATOES_ID + 1, "Beet");

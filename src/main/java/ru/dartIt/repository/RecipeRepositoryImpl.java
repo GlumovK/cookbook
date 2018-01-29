@@ -12,7 +12,7 @@ import java.util.List;
 
 @Repository
 @Transactional(readOnly = true)
-public class JpaRecipeRepositoryImpl implements RecipeRepository {
+public class RecipeRepositoryImpl implements RecipeRepository {
 
     @PersistenceContext
     private EntityManager em;

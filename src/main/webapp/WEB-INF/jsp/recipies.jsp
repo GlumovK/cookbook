@@ -18,7 +18,7 @@
                 <input type="text" class="form-control" id="name" value="${param.name}" placeholder="Enter name"
                        name="name">
             </div>
-            <button type="submit" class="btn btn-default">Submit</button>
+            <button type="submit" class="btn btn-default">Искать</button>
         </form>
         <hr>
         <form method="post" action="recipies/getByUser">
@@ -27,7 +27,7 @@
                 <input type="text" class="form-control" id="user" value="${param.user}" placeholder="Enter user"
                        name="user">
             </div>
-            <button type="submit" class="btn btn-default">Submit</button>
+            <button type="submit" class="btn btn-default">Искать</button>
         </form>
         <hr>
         <form method="post" action="recipies/getByIngredient">
@@ -36,7 +36,7 @@
                 <input type="text" class="form-control" id="ingredient" value="${param.ingredient}"
                        placeholder="Enter ingredient" name="ingredient">
             </div>
-            <button type="submit" class="btn btn-default">Submit</button>
+            <button type="submit" class="btn btn-default">Искать</button>
         </form>
         <hr>
         <form method="post" action="recipies/getByCatalog">
@@ -45,7 +45,7 @@
                 <input type="text" class="form-control" id="catalog" value="${param.catalog}"
                        placeholder="Enter catalog" name="catalog">
             </div>
-            <button type="submit" class="btn btn-default">Submit</button>
+            <button type="submit" class="btn btn-default">Искать</button>
         </form>
         <hr>
         <a href="recipies/create">Добавить рецепт</a>

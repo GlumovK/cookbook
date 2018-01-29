@@ -3,7 +3,7 @@
 
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
-        <a href="meals" class="navbar-brand">Cookbook</a>
+        <a href="recipies" class="navbar-brand">Cookbook</a>
 
         <div class="collapse navbar-collapse">
             <form class="navbar-form navbar-right">

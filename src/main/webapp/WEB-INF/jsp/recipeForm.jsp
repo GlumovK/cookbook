@@ -30,7 +30,6 @@
                            value="${recipe.cookAlgorithm}" name="cookAlgorithm" required>
                 </div>
                 <button type="submit" class="btn btn-default">Сохранить</button>
-                <button onclick="window.history.back()" type="button" class="btn btn-default">Отмена</button>
             </form>
         </section>
     </div>

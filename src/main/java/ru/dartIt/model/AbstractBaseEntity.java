@@ -1,5 +1,6 @@
 package ru.dartIt.model;
 
+import org.hibernate.Hibernate;
 import ru.dartIt.HasId;
 
 import javax.persistence.*;
@@ -44,9 +45,9 @@ public abstract class AbstractBaseEntity implements HasId {
         if (this == o) {
             return true;
         }
-//        if (o == null || !getClass().equals(Hibernate.getClass(o))) {
-//            return false;
-//        }
+        if (o == null || !getClass().equals(Hibernate.getClass(o))) {
+            return false;
+        }
         AbstractBaseEntity that = (AbstractBaseEntity) o;
         return id != null && id.equals(that.id);
     }

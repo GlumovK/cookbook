@@ -1,12 +1,10 @@
 package ru.dartIt.util;
 
-
 import ru.dartIt.model.Role;
 import ru.dartIt.model.User;
 import ru.dartIt.to.UserTo;
 
 public class UserUtil {
-
 
     public static User createNewFromTo(UserTo newUser) {
         return new User(null, newUser.getName(), newUser.getEmail().toLowerCase(), newUser.getPassword(), Role.ROLE_USER);

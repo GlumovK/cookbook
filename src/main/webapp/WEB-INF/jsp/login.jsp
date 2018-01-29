@@ -26,19 +26,17 @@
 
 <div class="jumbotron">
     <div class="container">
-
         <br/>
         <p>
             <a class="btn btn-lg btn-success" href="register">Register &raquo;</a>
             <button type="submit" class="btn btn-lg btn-primary" onclick="setCredentials('user@yandex.ru', 'password')">
-              User
+                User
             </button>
             <button type="submit" class="btn btn-lg btn-primary" onclick="setCredentials('admin@gmail.com', 'admin')">
-              Admin
+                Admin
             </button>
         </p>
         <br/>
-
     </div>
 </div>
 <script type="text/javascript">

@@ -1,22 +1,18 @@
 package ru.dartIt.web;
 
 
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import ru.dartIt.model.Recipe;
 
 import javax.servlet.http.HttpServletRequest;
 
-
-
 @Controller
 @RequestMapping(value = "/recipies")
-public class JspRecipeController  extends AbstractRecipeController {
+public class JspRecipeController extends AbstractRecipeController {
 
     @GetMapping("/create")
     public String create(Model model) {
@@ -57,9 +53,9 @@ public class JspRecipeController  extends AbstractRecipeController {
         Recipe recipe = new Recipe(request.getParameter("name"),
                 request.getParameter("description"),
                 request.getParameter("cookAlgorithm"));
-            super.create(recipe);
-            return "redirect:/recipies";
-        }
+        super.create(recipe);
+        return "redirect:/recipies";
+    }
 
     @GetMapping("/addVote")
     public String addVote(HttpServletRequest request) {
@@ -67,13 +63,13 @@ public class JspRecipeController  extends AbstractRecipeController {
         super.addVote(id);
         return "redirect:/recipies";
     }
+
     @GetMapping("/subtractVote")
     public String subtractVote(HttpServletRequest request) {
         int id = Integer.parseInt(request.getParameter("id"));
         super.subtractVote(id);
         return "redirect:/recipies";
     }
-
-    }
+}
 
 

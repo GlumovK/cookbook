@@ -5,15 +5,13 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.dartIt.model.Catalog;
 
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
 @Transactional(readOnly = true)
-public class JpaCatalogRepositoryImpl implements CatalogRepository{
-
+public class JpaCatalogRepositoryImpl implements CatalogRepository {
 
     @PersistenceContext
     private EntityManager em;

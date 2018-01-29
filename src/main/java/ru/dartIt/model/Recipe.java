@@ -5,17 +5,11 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.time.LocalDateTime;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-
-
-@SuppressWarnings("JpaQlInspection")
 @NamedQueries({
         @NamedQuery(name = Recipe.ALL, query = "SELECT r FROM Recipe r "),
         @NamedQuery(name = Recipe.DELETE, query = "DELETE FROM Recipe r WHERE r.id=:id"),
@@ -23,9 +17,6 @@ import java.util.Set;
         @NamedQuery(name = Recipe.BY_CATALOG, query = "SELECT r FROM Recipe r join r.catalogs c WHERE c.name=?1"),
         @NamedQuery(name = Recipe.BY_USER, query = "SELECT r FROM Recipe r WHERE r.user.name=?1"),
         @NamedQuery(name = Recipe.BY_NAME, query = "SELECT r FROM Recipe r WHERE r.name=?1"),
-
-        // "SELECT p FROM Provider p join p.categories c WHERE c.title=:title"
-        //select b from Brand b inner join b.categoryCollection category  where category.id = :categoryId;
 })
 
 @Entity
@@ -44,47 +35,35 @@ public class Recipe extends AbstractNamedEntity {
     @Size(min = 2, max = 120)
     private String description;
 
- //   private Ingredient ingredient;
-
     @Column(name = "cookAlgorithm", nullable = false)
     @NotBlank
-    private  String cookAlgorithm;
+    private String cookAlgorithm;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
-    private  User user;
+    private User user;
 
     @Column(name = "rating", nullable = false)
     private int rating;
 
-//    @NotEmpty
-//    @ManyToMany(fetch = FetchType.LAZY)
-//    @JoinTable(name = "APP_USER_USER_PROFILE",
-//            joinColumns = { @JoinColumn(name = "USER_ID") },
-//            inverseJoinColumns = { @JoinColumn(name = "USER_PROFILE_ID") })
-//    private Set<UserProfile> userProfiles = new HashSet<UserProfile>();
-
-   // @NotEmpty
-    @ManyToMany(fetch = FetchType.EAGER , cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "ingredient_to_recipe",
-            joinColumns = { @JoinColumn(name = "recipe_id") },
-            inverseJoinColumns = { @JoinColumn(name = "ingredient_id") })
+            joinColumns = {@JoinColumn(name = "recipe_id")},
+            inverseJoinColumns = {@JoinColumn(name = "ingredient_id")})
     private Set<Ingredient> ingredients = new HashSet<>();
 
-
-
-  //  @NotEmpty
-    @ManyToMany(fetch = FetchType.EAGER , cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "catalog_to_recipe",
-            joinColumns = { @JoinColumn(name = "recipe_id") },
-            inverseJoinColumns = { @JoinColumn(name = "catalog_id") })
+            joinColumns = {@JoinColumn(name = "recipe_id")},
+            inverseJoinColumns = {@JoinColumn(name = "catalog_id")})
     private Set<Catalog> catalogs = new HashSet<>();
 
     public Recipe() {
     }
-    public Recipe( String name, String description, String cookAlgorithm) {
+
+    public Recipe(String name, String description, String cookAlgorithm) {
         this(null, name, description, cookAlgorithm, 0);
     }
 
@@ -95,9 +74,6 @@ public class Recipe extends AbstractNamedEntity {
         this.rating = rating;
     }
 
-
-
-
     public String getDescription() {
         return description;
     }
@@ -105,14 +81,6 @@ public class Recipe extends AbstractNamedEntity {
     public void setDescription(String description) {
         this.description = description;
     }
-
-//    public Ingredient getIngredient() {
-//        return ingredient;
-//    }
-//
-//    public void setIngredient(Ingredient ingredient) {
-//        this.ingredient = ingredient;
-//    }
 
     public String getCookAlgorithm() {
         return cookAlgorithm;

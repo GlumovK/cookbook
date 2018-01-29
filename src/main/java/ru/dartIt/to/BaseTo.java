@@ -4,6 +4,7 @@ package ru.dartIt.to;
 import ru.dartIt.HasId;
 
 public abstract class BaseTo implements HasId {
+
     protected Integer id;
 
     public BaseTo() {

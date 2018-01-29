@@ -10,7 +10,6 @@ DROP SEQUENCE IF EXISTS global_seq;
 
 CREATE SEQUENCE global_seq START 100000;
 
-
 CREATE TABLE users
 (
   id       INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
@@ -34,8 +33,7 @@ CREATE TABLE recipes
 (
   id            INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
   name          VARCHAR NOT NULL,
-  description   TEXT NOT NULL,
---   ingredient_id INTEGER NOT NULL,
+  description   TEXT    NOT NULL,
   cookAlgorithm VARCHAR NOT NULL,
   user_id       INTEGER NOT NULL,
   rating        INT     NOT NULL,
@@ -52,22 +50,22 @@ CREATE TABLE catalogs
 
 CREATE TABLE ingredients
 (
-  id        INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
-  name      VARCHAR NOT NULL
+  id   INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
+  name VARCHAR NOT NULL
 );
 
 CREATE TABLE catalog_to_recipe (
   id         INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
   catalog_id INTEGER NOT NULL,
   recipe_id  INTEGER NOT NULL,
-    CONSTRAINT FK_catalog_id FOREIGN KEY (catalog_id) REFERENCES catalogs (id) ON DELETE CASCADE,
+  CONSTRAINT FK_catalog_id FOREIGN KEY (catalog_id) REFERENCES catalogs (id) ON DELETE CASCADE,
   CONSTRAINT FK_recipe_id FOREIGN KEY (recipe_id) REFERENCES recipes (id) ON DELETE CASCADE
 );
 
 CREATE TABLE ingredient_to_recipe (
-  id         INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
+  id            INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
   ingredient_id INTEGER NOT NULL,
-  recipe_id  INTEGER NOT NULL,
+  recipe_id     INTEGER NOT NULL,
   CONSTRAINT FK_ingredient_id FOREIGN KEY (ingredient_id) REFERENCES ingredients (id) ON DELETE CASCADE,
   CONSTRAINT FK_recipe_id FOREIGN KEY (recipe_id) REFERENCES recipes (id) ON DELETE CASCADE
 );

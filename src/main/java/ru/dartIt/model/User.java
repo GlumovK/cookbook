@@ -1,8 +1,6 @@
 package ru.dartIt.model;
 
 import org.hibernate.annotations.BatchSize;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -42,20 +40,8 @@ public class User extends AbstractNamedEntity {
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role")
     @ElementCollection(fetch = FetchType.EAGER)
-//    @Fetch(FetchMode.SUBSELECT)
     @BatchSize(size = 200)
     private Set<Role> roles;
-
-//    {
-//            GrantedAuthority auth = new GrantedAuthority() {
-//                private static final long serialVersionUID = 1L;
-//
-//                public String getAuthority() {
-//                    return "ROLE_USER";
-//                }
-//            };
-//            roles.add(auth);
-//    }
 
     public User() {
     }
@@ -65,7 +51,7 @@ public class User extends AbstractNamedEntity {
     }
 
     public User(Integer id, String name, String email, String password, Role role, Role... roles) {
-        this(id, name, email, password, true,  EnumSet.of(role, roles));
+        this(id, name, email, password, true, EnumSet.of(role, roles));
     }
 
     public User(Integer id, String name, String email, String password) {
@@ -80,6 +66,7 @@ public class User extends AbstractNamedEntity {
         this.password = password;
         this.enabled = enabled;
     }
+
     public User(Integer id, String name, String email, String password, boolean enabled, Collection<Role> roles) {
         super(id, name);
         this.email = email;

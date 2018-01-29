@@ -9,17 +9,10 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringRunner;
 import ru.dartIt.CatalogTestData;
-
 import ru.dartIt.model.Catalog;
 import ru.dartIt.util.exception.NotFoundException;
-
-
 import java.util.List;
-
 import static ru.dartIt.CatalogTestData.*;
-
-
-
 
 @ContextConfiguration({
         "classpath:spring/spring-app.xml",

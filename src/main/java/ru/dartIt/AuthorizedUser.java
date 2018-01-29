@@ -1,20 +1,12 @@
 package ru.dartIt;
 
-
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import ru.dartIt.model.User;
 import ru.dartIt.to.UserTo;
 import ru.dartIt.util.UserUtil;
 
-
-import java.util.HashSet;
-import java.util.Set;
-
 import static java.util.Objects.requireNonNull;
-
 
 public class AuthorizedUser extends org.springframework.security.core.userdetails.User {
     private static final long serialVersionUID = 1L;
@@ -44,8 +36,6 @@ public class AuthorizedUser extends org.springframework.security.core.userdetail
     public static int id() {
         return get().userTo.getId();
     }
-
-
 
     public void update(UserTo newTo) {
         userTo = newTo;

@@ -1,14 +1,9 @@
 package ru.dartIt.service;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import ru.dartIt.AuthorizedUser;
 import ru.dartIt.model.User;
@@ -17,9 +12,7 @@ import ru.dartIt.to.UserTo;
 import ru.dartIt.util.UserUtil;
 import ru.dartIt.util.exception.NotFoundException;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static ru.dartIt.util.ValidationUtil.checkNotFound;
 import static ru.dartIt.util.ValidationUtil.checkNotFoundWithId;
@@ -61,17 +54,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return repository.getAll();
     }
 
-//    @Override
-//    public void update(User user) {
-//        Assert.notNull(user, "user must not be null");
-//        checkNotFoundWithId(repository.save(user), user.getId());
-//    }
     @Override
     public void enable(int id, boolean enabled) {
         User user = get(id);
         user.setEnabled(enabled);
         repository.save(user);
     }
+
     @Override
     public AuthorizedUser loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = repository.getByEmail(email.toLowerCase());
@@ -79,7 +68,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             throw new UsernameNotFoundException("User " + email + " is not found");
         }
         return new AuthorizedUser(user);
-
     }
 
     @Override
@@ -87,4 +75,4 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         User user = get(userTo.getId());
         repository.save(UserUtil.updateFromTo(user, userTo));
     }
-    }
+}

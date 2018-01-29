@@ -7,7 +7,6 @@ import ru.dartIt.util.exception.NotFoundException;
 import java.util.List;
 
 public interface RecipeService {
-   // Recipe create(Recipe recipe);
 
     Recipe create(Recipe recipe, int userId);
 
@@ -15,7 +14,6 @@ public interface RecipeService {
 
     Recipe get(int id) throws NotFoundException;
 
-    //  void update(Recipe recipe);
     Recipe update(Recipe recipe, int userId) throws NotFoundException;
 
     List<Recipe> getByIngredient(String ingredientName);

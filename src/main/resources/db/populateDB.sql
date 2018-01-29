@@ -1,5 +1,5 @@
 DELETE FROM user_roles;
-DELETE FROM  ingredient_to_recipe;
+DELETE FROM ingredient_to_recipe;
 DELETE FROM catalog_to_recipe;
 DELETE FROM ingredients;
 DELETE FROM catalogs;
@@ -47,13 +47,13 @@ INSERT INTO catalog_to_recipe (catalog_id, recipe_id) VALUES
   (100011, 100006);
 
 INSERT INTO ingredient_to_recipe (ingredient_id, recipe_id) VALUES
-  (100012,100002),
-  (100012,100003),
-  (100012,100004),
-  (100013,100002),
-  (100014,100003),
-  (100015,100002),
-  (100015,100004),
-  (100016,100004),
-  (100017,100005),
-  (100018,100006);
+  (100012, 100002),
+  (100012, 100003),
+  (100012, 100004),
+  (100013, 100002),
+  (100014, 100003),
+  (100015, 100002),
+  (100015, 100004),
+  (100016, 100004),
+  (100017, 100005),
+  (100018, 100006);

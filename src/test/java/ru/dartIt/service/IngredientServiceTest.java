@@ -10,12 +10,8 @@ import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringRunner;
 import ru.dartIt.model.Ingredient;
 import ru.dartIt.util.exception.NotFoundException;
-
-
 import java.util.List;
-
 import static ru.dartIt.IngredientTestData.*;
-
 
 @ContextConfiguration({
         "classpath:spring/spring-app.xml",

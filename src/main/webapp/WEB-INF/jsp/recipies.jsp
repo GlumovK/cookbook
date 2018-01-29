@@ -10,111 +10,77 @@
 <div class="jumbotron">
     <div class="container">
 
-<h3>Recipies</h3>
-<hr>
-
-<%--<form method="post" action="recipies/getByName">--%>
-    <%--<dl>--%>
-        <%--<dt>Искать рецепт по названию</dt>--%>
-        <%--<dd><input type="text" name="name" value="${param.name}"></dd>--%>
-
-        <form  method="post" action="recipies/getByName">
+        <h3>Recipies</h3>
+        <hr>
+        <form method="post" action="recipies/getByName">
             <div class="form-group">
                 <label for="name">Искать рецепт по названию</label>
-                <input type="text"  class="form-control"  id="name"  value="${param.name}" placeholder="Enter name" name="name">
+                <input type="text" class="form-control" id="name" value="${param.name}" placeholder="Enter name"
+                       name="name">
             </div>
             <button type="submit" class="btn btn-default">Submit</button>
         </form>
-
-    <%--</dl>--%>
-    <%--<button type="submit" class="btn btn-info">Искать</button>--%>
-<%--</form>--%>
-
-
-<hr>
-<%--<form method="post" action="recipies/getByUser">--%>
-    <%--<dl>--%>
-        <%--<dt>Искать рецепт по автору</dt>--%>
-        <%--<dd><input type="text" name="user" value="${param.user}"></dd>--%>
-    <%--</dl>--%>
-    <%--<button type="submit" class="btn btn-info">Искать</button>--%>
-<%--</form>--%>
-        <form  method="post" action="recipies/getByUser">
+        <hr>
+        <form method="post" action="recipies/getByUser">
             <div class="form-group">
                 <label for="user">Искать рецепт по автору</label>
-                <input type="text"  class="form-control"  id="user"  value="${param.user}" placeholder="Enter user" name="user">
+                <input type="text" class="form-control" id="user" value="${param.user}" placeholder="Enter user"
+                       name="user">
             </div>
             <button type="submit" class="btn btn-default">Submit</button>
         </form>
         <hr>
-<%--<form method="post" action="recipies/getByIngredient">--%>
-    <%--<dl>--%>
-        <%--<dt>Искать рецепт по ингредиентам</dt>--%>
-        <%--<dd><input type="text" name="ingredient" value="${param.ingredient}"></dd>--%>
-    <%--</dl>--%>
-    <%--<button type="submit" class="btn btn-info">Искать</button>--%>
-<%--</form>--%>
-        <form  method="post" action="recipies/getByIngredient">
+        <form method="post" action="recipies/getByIngredient">
             <div class="form-group">
                 <label for="ingredient">Искать рецепт по ингредиентам</label>
-                <input type="text"  class="form-control"  id="ingredient"  value="${param.ingredient}" placeholder="Enter ingredient" name="ingredient">
+                <input type="text" class="form-control" id="ingredient" value="${param.ingredient}"
+                       placeholder="Enter ingredient" name="ingredient">
             </div>
             <button type="submit" class="btn btn-default">Submit</button>
         </form>
         <hr>
-<%--<form method="post" action="recipies/getByCatalog">--%>
-<%--<dl>--%>
-    <%--<dt>Искать рецепт по каталогу</dt>--%>
-    <%--<dd><input type="text" name="catalog" value="${param.catalog}"></dd>--%>
-<%--</dl>--%>
-    <%--<button type="submit" class="btn btn-info">Искать</button>--%>
-<%--</form>--%>
-        <form  method="post" action="recipies/getByCatalog">
+        <form method="post" action="recipies/getByCatalog">
             <div class="form-group">
                 <label for="catalog">Искать рецепт по каталогу (Soup, Second course, Snack, Salad, Drink)</label>
-                <input type="text"  class="form-control"  id="catalog"  value="${param.catalog}" placeholder="Enter catalog" name="catalog">
+                <input type="text" class="form-control" id="catalog" value="${param.catalog}"
+                       placeholder="Enter catalog" name="catalog">
             </div>
             <button type="submit" class="btn btn-default">Submit</button>
         </form>
-
-
-
-<hr>
-<a href="recipies/create">Добавить рецепт</a>
-<hr>
-<table class="table table-striped display" id="datatable">
-    <thead>
-    <tr>
-        <th>name</th>
-        <th>description</th>
-        <th>cookAlgorithm</th>
-        <th>ingredients</th>
-        <th>user.name</th>
-        <th>rating</th>
-        <th></th>
-        <th></th>
-
-
-    </tr>
-    </thead>
-    <c:forEach items="${recipies}" var="recipe">
-        <jsp:useBean id="recipe" scope="page" type="ru.dartIt.model.Recipe"/>
-        <tr>
-            <td>${recipe.name}</td>
-            <td>${recipe.description}</td>
-            <td>${recipe.cookAlgorithm}</td>
-            <td>
-                <c:forEach items="${recipe.ingredients}" var="ingredient">
-                    ${ingredient.name}
-                </c:forEach>
-            </td>
-            <td>${recipe.user.name}</td>
-            <td>${recipe.rating}</td>
-            <td><a href="recipies/addVote?id=${recipe.id}">+1</a></td>
-            <td><a href="recipies/subtractVote?id=${recipe.id}">-1</a></td>
-        </tr>
-    </c:forEach>
-</table>
+        <hr>
+        <a href="recipies/create">Добавить рецепт</a>
+        <hr>
+        <table class="table table-striped display" id="datatable">
+            <thead>
+            <tr>
+                <th>name</th>
+                <th>description</th>
+                <th>cookAlgorithm</th>
+                <th>ingredients</th>
+                <th>user.name</th>
+                <th>rating</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <c:forEach items="${recipies}" var="recipe">
+                <jsp:useBean id="recipe" scope="page" type="ru.dartIt.model.Recipe"/>
+                <tr>
+                    <td>${recipe.name}</td>
+                    <td>${recipe.description}</td>
+                    <td>${recipe.cookAlgorithm}</td>
+                    <td>
+                        <c:forEach items="${recipe.ingredients}" var="ingredient">
+                            ${ingredient.name}
+                        </c:forEach>
+                    </td>
+                    <td>${recipe.user.name}</td>
+                    <td>${recipe.rating}</td>
+                    <td><a href="recipies/addVote?id=${recipe.id}">+1</a></td>
+                    <td><a href="recipies/subtractVote?id=${recipe.id}">-1</a></td>
+                </tr>
+            </c:forEach>
+        </table>
     </div>
 </div>
 </body>

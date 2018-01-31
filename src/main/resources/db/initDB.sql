@@ -6,13 +6,11 @@ DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS ingredients;
 DROP TABLE IF EXISTS catalogs;
 
-DROP SEQUENCE IF EXISTS global_seq;
 
-CREATE SEQUENCE global_seq START 100000;
 
 CREATE TABLE users
 (
-  id       INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
+  id        SERIAL PRIMARY KEY,
   name     VARCHAR                 NOT NULL,
   email    VARCHAR                 NOT NULL,
   password VARCHAR                 NOT NULL,
@@ -23,7 +21,7 @@ CREATE UNIQUE INDEX users_unique_email_idx
 
 CREATE TABLE user_roles
 (
-  user_id INTEGER NOT NULL,
+  user_id  SERIAL PRIMARY KEY,
   role    VARCHAR,
   CONSTRAINT user_roles_idx UNIQUE (user_id, role),
   FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
@@ -31,7 +29,7 @@ CREATE TABLE user_roles
 
 CREATE TABLE recipes
 (
-  id            INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
+  id            SERIAL PRIMARY KEY,
   name          VARCHAR NOT NULL,
   description   TEXT    NOT NULL,
   cookAlgorithm VARCHAR NOT NULL,
@@ -44,18 +42,18 @@ CREATE UNIQUE INDEX recipes_unique_name_idx
 
 CREATE TABLE catalogs
 (
-  id   INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
+  id   SERIAL PRIMARY KEY,
   name VARCHAR NOT NULL
 );
 
 CREATE TABLE ingredients
 (
-  id   INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
+  id  SERIAL PRIMARY KEY,
   name VARCHAR NOT NULL
 );
 
 CREATE TABLE catalog_to_recipe (
-  id         INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
+  id         SERIAL PRIMARY KEY,
   catalog_id INTEGER NOT NULL,
   recipe_id  INTEGER NOT NULL,
   CONSTRAINT FK_catalog_id FOREIGN KEY (catalog_id) REFERENCES catalogs (id) ON DELETE CASCADE,
@@ -63,7 +61,7 @@ CREATE TABLE catalog_to_recipe (
 );
 
 CREATE TABLE ingredient_to_recipe (
-  id            INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
+  id            SERIAL PRIMARY KEY,
   ingredient_id INTEGER NOT NULL,
   recipe_id     INTEGER NOT NULL,
   CONSTRAINT FK_ingredient_id FOREIGN KEY (ingredient_id) REFERENCES ingredients (id) ON DELETE CASCADE,

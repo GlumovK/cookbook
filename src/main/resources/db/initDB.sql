@@ -16,8 +16,7 @@ CREATE TABLE users
   password VARCHAR                 NOT NULL,
   enabled  BOOL DEFAULT TRUE       NOT NULL
 );
-CREATE UNIQUE INDEX users_unique_email_idx
-  ON users (email);
+CREATE UNIQUE INDEX users_unique_email_idx ON users (email);
 
 CREATE TABLE user_roles
 (
@@ -37,8 +36,8 @@ CREATE TABLE recipes
   rating        INT     NOT NULL,
   FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
-CREATE UNIQUE INDEX recipes_unique_name_idx
-  ON recipes (name);
+CREATE UNIQUE INDEX recipes_unique_user_name_idx ON recipes (user_id, name);
+
 
 CREATE TABLE catalogs
 (
@@ -59,6 +58,7 @@ CREATE TABLE catalog_to_recipe (
   CONSTRAINT FK_catalog_id FOREIGN KEY (catalog_id) REFERENCES catalogs (id) ON DELETE CASCADE,
   CONSTRAINT FK_recipe_id FOREIGN KEY (recipe_id) REFERENCES recipes (id) ON DELETE CASCADE
 );
+CREATE UNIQUE INDEX catalog_to_recipe_unique_catalog_recipe_idx ON catalog_to_recipe (catalog_id, recipe_id);
 
 CREATE TABLE ingredient_to_recipe (
   id            SERIAL PRIMARY KEY,
@@ -67,3 +67,4 @@ CREATE TABLE ingredient_to_recipe (
   CONSTRAINT FK_ingredient_id FOREIGN KEY (ingredient_id) REFERENCES ingredients (id) ON DELETE CASCADE,
   CONSTRAINT FK_recipe_id FOREIGN KEY (recipe_id) REFERENCES recipes (id) ON DELETE CASCADE
 );
+CREATE UNIQUE INDEX ingredient_to_recipe_unique_ingredient_recipe_idx ON ingredient_to_recipe (ingredient_id, recipe_id);

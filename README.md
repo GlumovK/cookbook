@@ -1,4 +1,4 @@
-Используемые технологии: Spring, Hibernate, Spring Security, Postgresql, Maven, Bootstrap.
+Используемые технологии: Spring, Hibernate, Spring MVC, Spring Security, Postgresql, Maven, Bootstrap.
 Для запуска приложения необходимо создать базу данных cookbook. username=user, password=password.
 Сделано более юнит 30 тестов.
 Права у всех пользователей сделаны "USER".

@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ru.dartIt.model.Recipe;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @Controller
 @RequestMapping(value = "/recipies")
@@ -21,9 +23,19 @@ public class JspRecipeController extends AbstractRecipeController {
     }
 
     @PostMapping("/getByUser")
-    public String getByUser(HttpServletRequest request, Model model) {
+    public String getByUser(HttpServletRequest request, HttpServletResponse response, Model model) {
         String userName = request.getParameter("user");
         model.addAttribute("recipies", super.getByUser(userName));
+
+        String text = "some text";
+        response.setContentType("text/plain");  // Set content type of the response so that jQuery knows what it can expect.
+        response.setCharacterEncoding("UTF-8"); // You want world domination, huh?
+        try {
+            response.getWriter().write(text);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         return "recipies";
     }
 
@@ -31,6 +43,7 @@ public class JspRecipeController extends AbstractRecipeController {
     public String getByIngredient(HttpServletRequest request, Model model) {
         String ingredientName = request.getParameter("ingredient");
         model.addAttribute("recipies", super.getByIngredient(ingredientName));
+
         return "recipies";
     }
 

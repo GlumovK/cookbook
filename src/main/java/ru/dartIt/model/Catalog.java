@@ -1,18 +1,8 @@
 package ru.dartIt.model;
 
-import javax.persistence.Entity;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
 
-@NamedQueries({
-        @NamedQuery(name = Catalog.DELETE, query = "DELETE FROM Catalog c WHERE c.id=:id"),
-        @NamedQuery(name = Catalog.BY_NAME, query = "SELECT c FROM Catalog c  WHERE c.name=?1"),
-        @NamedQuery(name = Catalog.ALL, query = "SELECT c FROM Catalog c"),
-})
 
-@Entity
-@Table(name = "catalogs")
+
 public class Catalog extends AbstractNamedEntity {
 
     public static final String DELETE = "Catalog.delete";

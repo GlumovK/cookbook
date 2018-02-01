@@ -5,6 +5,8 @@
 <html>
 <jsp:include page="fragments/headTag.jsp"/>
 <body>
+<script type="text/javascript" src="resources/js/recipies.js" defer></script>
+
 <jsp:include page="fragments/bodyHeader.jsp"/>
 
 <div class="jumbotron">
@@ -12,16 +14,16 @@
 
         <h3>Recipies</h3>
         <hr>
-        <form method="post" action="recipies/getByName">
+        <form method="post"  action="recipies/getByName">
             <div class="form-group">
                 <label for="name">Искать рецепт по названию</label>
                 <input type="text" class="form-control" id="name" value="${param.name}" placeholder="Enter name"
                        name="name">
             </div>
-            <button type="submit" class="btn btn-default">Искать</button>
+            <button type="submit" class="btn btn-default" onclick="update()">Искать</button>
         </form>
         <hr>
-        <form method="post" action="recipies/getByUser">
+        <form method="post" id="userName" action="recipies/getByUser">
             <div class="form-group">
                 <label for="user">Искать рецепт по автору</label>
                 <input type="text" class="form-control" id="user" value="${param.user}" placeholder="Enter user"
@@ -81,6 +83,8 @@
                 </tr>
             </c:forEach>
         </table>
+        !
+        <div id="ajaxGetUserServletResponse"></div>
     </div>
 </div>
 </body>

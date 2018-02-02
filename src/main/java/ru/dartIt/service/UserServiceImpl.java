@@ -18,7 +18,7 @@ import static ru.dartIt.util.ValidationUtil.checkNotFound;
 import static ru.dartIt.util.ValidationUtil.checkNotFoundWithId;
 
 @Service("userService")
-public class UserServiceImpl implements UserService, UserDetailsService {
+public class UserServiceImpl implements UserService {
 
     private final UserRepository repository;
 
@@ -61,14 +61,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         repository.save(user);
     }
 
-    @Override
-    public AuthorizedUser loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = repository.getByEmail(email.toLowerCase());
-        if (user == null) {
-            throw new UsernameNotFoundException("User " + email + " is not found");
-        }
-        return new AuthorizedUser(user);
-    }
+//    @Override
+//    public AuthorizedUser loadUserByUsername(String email) throws UsernameNotFoundException {
+//        User user = repository.getByEmail(email.toLowerCase());
+//        if (user == null) {
+//            throw new UsernameNotFoundException("User " + email + " is not found");
+//        }
+//        return new AuthorizedUser(user);
+//    }
 
     @Override
     public void update(UserTo userTo) {

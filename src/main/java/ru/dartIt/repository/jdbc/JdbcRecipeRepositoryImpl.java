@@ -42,19 +42,20 @@ public class JdbcRecipeRepositoryImpl implements RecipeRepository {
     public Recipe save(Recipe recipe, int userId) {
         MapSqlParameterSource map = new MapSqlParameterSource()
                 .addValue("id", recipe.getId())
+                .addValue("name", recipe.getName())
                 .addValue("description", recipe.getDescription())
                 .addValue("cookAlgorithm", recipe.getCatalogs())
-                .addValue("user_id", userId)
-                .addValue("rating", recipe.getRating());
+                .addValue("rating", recipe.getRating())
+                .addValue("user_id", userId);
 
         if (recipe.isNew()) {
             Number newId = insertRecipe.executeAndReturnKey(map);
             recipe.setId(newId.intValue());
         } else {
-            if (namedParameterJdbcTemplate.update("" +
+            if (namedParameterJdbcTemplate.update(
                             "UPDATE recipes " +
-                            "   SET description=:description, cookAlgorithm=:cookAlgorithm, rating=:rating " +
-                            " WHERE id=:id AND user_id=:user_id"
+                            "SET name=:name, description=:description, cookAlgorithm=:cookAlgorithm, rating=:rating " +
+                            "WHERE id=:id AND user_id=:user_id"
                     , map) == 0) {
                 return null;
             }
@@ -80,9 +81,9 @@ public class JdbcRecipeRepositoryImpl implements RecipeRepository {
     }
 
     @Override
-    public List<Recipe>  getByName(String name) {
-            return jdbcTemplate.query(
-                " SELECT * FROM recipes where name = ? ", ROW_MAPPER, name);
+    public List<Recipe> getByName(String name) {
+        return jdbcTemplate.query(
+                " SELECT * FROM recipes WHERE name = ? ", ROW_MAPPER, name);
     }
 
 

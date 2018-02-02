@@ -32,8 +32,8 @@ CREATE TABLE recipes
   name          VARCHAR NOT NULL,
   description   TEXT    NOT NULL,
   cookAlgorithm VARCHAR NOT NULL,
-  user_id       INTEGER NOT NULL,
   rating        INT     NOT NULL,
+  user_id       INTEGER NOT NULL,
   FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
 CREATE UNIQUE INDEX recipes_unique_user_name_idx ON recipes (user_id, name);

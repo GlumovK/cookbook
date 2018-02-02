@@ -17,12 +17,12 @@ INSERT INTO user_roles (role, user_id) VALUES
   ('ROLE_USER', 1),
   ('ROLE_ADMIN', 2);
 
-INSERT INTO recipes (name, description, cookAlgorithm, user_id, rating) VALUES
-  ('Borsch', 'Суп со свеклой', 'алгоритм борща', 1, 20),
-  ('Mushroom soup', 'Суп с грибами', 'алгоритм грибовницы', 1, 15),
-  ('Olivie', 'Салат с мясом', 'алгоритм оливье', 2, 26),
-  ('Omelette', 'Жареные яйца', 'алгоритм яишницы', 2, 11),
-  ('Cappuccino', 'Кофе с молоком', 'алгоритм капучино', 2, 42);
+INSERT INTO recipes (name, description, cookAlgorithm, rating, user_id) VALUES
+  ('Borsch', 'Суп со свеклой', 'алгоритм борща', 20,1),
+  ('Mushroom soup', 'Суп с грибами', 'алгоритм грибовницы', 15, 1),
+  ('Olivie', 'Салат с мясом', 'алгоритм оливье', 26, 2),
+  ('Omelette', 'Жареные яйца', 'алгоритм яишницы', 11, 2),
+  ('Cappuccino', 'Кофе с молоком', 'алгоритм капучино', 42, 2);
 
 INSERT INTO catalogs (name) VALUES
   ('Soup'),
